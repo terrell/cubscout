@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     cubscout (0.1.0)
+      faraday
       oauth2 (~> 1.4)
 
 GEM
