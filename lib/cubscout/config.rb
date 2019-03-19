@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "oauth2"
+
 module Cubscout
   DEFAULT_API_PREFIX = 'https://api.helpscout.net/v2'
 
