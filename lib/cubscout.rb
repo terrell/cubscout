@@ -7,6 +7,7 @@ require "cubscout/response"
 
 require "cubscout/list"
 require "cubscout/conversation"
+require "cubscout/user"
 
 module Cubscout
   class Error < StandardError; end
