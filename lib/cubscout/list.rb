@@ -2,9 +2,10 @@ module Cubscout
   class List
     include Enumerable
 
-    def initialize(raw_payload, collection_name)
+    def initialize(raw_payload, collection_name, object_class)
       @raw_payload = raw_payload
       @collection_name = collection_name
+      @object_class = object_class
     end
 
     def page
@@ -24,7 +25,7 @@ module Cubscout
     end
 
     def items
-      raw_payload.dig("_embedded", collection_name)
+      raw_payload.dig("_embedded", collection_name).map { |item| object_class.new(item) }
     end
 
     def each(&block)
@@ -33,6 +34,6 @@ module Cubscout
 
     private
 
-    attr_reader :raw_payload, :collection_name
+    attr_reader :raw_payload, :collection_name, :object_class
   end
 end
