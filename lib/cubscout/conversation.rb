@@ -1,12 +1,8 @@
 module Cubscout
-  class Conversation < List
+  class Conversation < Object
     path "conversations"
 
     class << self
-      def find(id)
-        Cubscout.connection.get("#{read_path}/#{id}")
-      end
-
       def threads(id)
         Cubscout.connection.get("#{read_path}/#{id}/threads").body.dig("_embedded", "threads")
       end
