@@ -7,6 +7,10 @@ module Cubscout
         @path = the_path
       end
 
+      def read_path
+        @path
+      end
+
       def all(options = {})
         raise "No path given" unless @path
 
@@ -47,7 +51,7 @@ module Cubscout
     end
 
     def items
-      raw_payload.dig("_embedded", @path)
+      raw_payload.dig("_embedded", self.class.read_path)
     end
 
     def each(&block)
