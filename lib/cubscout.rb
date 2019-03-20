@@ -19,4 +19,5 @@ module Cubscout
   class MalformedRequestError < StandardError; end
   class PermissionDeniedError < StandardError; end
   class ResourceNotFoundError < StandardError; end
+  class RateLimitExceeded < StandardError; end
 end
