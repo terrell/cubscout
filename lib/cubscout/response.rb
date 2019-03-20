@@ -6,7 +6,7 @@ module Cubscout
   class Response < Faraday::Response::Middleware
     def on_complete(env)
       handle_response_status(env.status, env.body)
-      parse_json_reponse(env) unless env.status == 204
+      parse_json_reponse(env)
     end
 
     private
@@ -27,6 +27,8 @@ module Cubscout
     end
 
     def parse_json_reponse(env)
+      return true if [201, 204].include?(env.status)
+
       begin
         parsed_body = JSON.parse(env.body)
         env[:raw_body] = env.body
