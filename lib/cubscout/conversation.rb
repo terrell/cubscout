@@ -13,6 +13,11 @@ module Cubscout
       end
     end
 
+    def assignee
+      return nil unless self.attributes.has_key?("assignee")
+      User.find(self.attributes.dig('assignee', 'id'))
+    end
+
     def threads
       Conversation.threads(self.id)
     end

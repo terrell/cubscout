@@ -2,6 +2,8 @@ module Cubscout
   class Object
     include Scopes
 
+    attr_reader :attributes
+
     def initialize(attributes)
       @attributes = attributes
     end
