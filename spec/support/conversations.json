@@ -1,0 +1,90 @@
+{
+  "_embedded": {
+    "conversations": [
+      {
+        "id": 123123123,
+        "number": 12121,
+        "threads": 1,
+        "type": "email",
+        "folderId": 321321321,
+        "status": "active",
+        "state": "published",
+        "subject": "The email subject",
+        "preview": "I'm a customer and I have a problem",
+        "mailboxId": 121212,
+        "createdBy": {
+          "id": 999888,
+          "type": "customer",
+          "first": "Jules",
+          "last": "Verne",
+          "photoUrl": "https://d33v4339jhl8k0.cloudfront.net/customer-avatar/05.png",
+          "email": "jules.verne@aroundtheworld.com"
+        },
+        "createdAt": "2019-03-21T10:54:34Z",
+        "closedBy": 0,
+        "userUpdatedAt": "2019-03-21T10:54:34Z",
+        "customerWaitingSince": {"time": "2019-03-21T10:54:34Z", "friendly": "1 min ago"},
+        "source": {"type": "beacon-v2", "via": "customer"},
+        "tags": [{"id": 44455566, "color": "#A5B2BD", "tag": "cool tag"}],
+        "cc": [],
+        "bcc": [],
+        "primaryCustomer": {"id": 999888},
+        "customFields": [],
+        "_links": {
+          "closedBy": {"href": "https://api.helpscout.net/v2/users/0"},
+          "createdByCustomer": {"href": "https://api.helpscout.net/v2/customers/999888"},
+          "mailbox": {"href": "https://api.helpscout.net/v2/mailboxes/121212"},
+          "primaryCustomer": {"href": "https://api.helpscout.net/v2/customers/999888"},
+          "self": {"href": "https://api.helpscout.net/v2/conversations/123123123"},
+          "threads": {"href": "https://api.helpscout.net/v2/conversations/123123123/threads/"},
+          "web": {"href": "https://secure.helpscout.net/conversation/123123123/12121"}
+        }
+      },
+      {
+        "id": 999888777,
+        "number": 555444,
+        "threads": 1,
+        "type": "email",
+        "folderId": 77788899,
+        "status": "active",
+        "state": "published",
+        "subject": "The email subject",
+        "preview": "Another thing",
+        "mailboxId": 788787,
+        "createdBy": {
+          "id": 3333222,
+          "type": "customer",
+          "first": "Michel",
+          "last": "Strogoff",
+          "photoUrl": "https://d33v4339jhl8k0.cloudfront.net/customer-avatar/06.png",
+          "email": "michel.strogoff@siberia.com"
+        },
+        "createdAt": "2019-03-21T10:54:34Z",
+        "closedBy": 0,
+        "userUpdatedAt": "2019-03-21T10:54:34Z",
+        "customerWaitingSince": {"time": "2019-03-20T15:59:18Z", "friendly": "18 hours ago"},
+        "source": {"type": "email", "via": "customer"},
+        "tags": [{"id": 77666655, "color": "#E52F28", "tag": "another tag"}],
+        "cc": [],
+        "bcc": [],
+        "primaryCustomer": {"id": 3333222},
+        "customFields": [],
+        "_links": {
+          "closedBy": {"href": "https://api.helpscout.net/v2/users/0"},
+          "createdByCustomer": {"href": "https://api.helpscout.net/v2/customers/3333222"},
+          "mailbox": {"href": "https://api.helpscout.net/v2/mailboxes/788787"},
+          "primaryCustomer": {"href": "https://api.helpscout.net/v2/customers/3333222"},
+          "self": {"href": "https://api.helpscout.net/v2/conversations/999888777"},
+          "threads": {"href": "https://api.helpscout.net/v2/conversations/999888777/threads/"},
+          "web": {"href": "https://secure.helpscout.net/conversation/999888777/555444"}
+        }
+      }
+    ]
+  },
+  "page": {
+    "number": 1,
+    "size": 50,
+    "totalPages": 3,
+    "totalElements": 132
+  }
+}
