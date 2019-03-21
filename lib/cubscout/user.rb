@@ -1,5 +1,5 @@
 module Cubscout
-  class User < List
+  class User < Object
     path "users"
   end
 end

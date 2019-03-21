@@ -5,7 +5,9 @@ require "cubscout/resource"
 require "cubscout/request"
 require "cubscout/response"
 
+require "cubscout/scopes"
 require "cubscout/list"
+require "cubscout/object"
 require "cubscout/conversation"
 require "cubscout/user"
 
