@@ -9,7 +9,7 @@ module Cubscout
 
       def create_note(id, attributes)
         raise "Missing attribute `text` while creating new note" unless attributes.has_key?(:text)
-        Cubscout.connection.post("#{read_path}/#{id}/notes", attributes.to_json)
+        Cubscout.connection.post("#{read_path}/#{id}/notes", attributes.to_json).body
       end
     end
 
