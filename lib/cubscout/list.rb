@@ -25,7 +25,7 @@ module Cubscout
     end
 
     def items
-      raw_payload.dig("_embedded", collection_name).map { |item| object_class.new(item) }
+      Array(raw_payload.dig("_embedded", collection_name)).map { |item| object_class.new(item) }
     end
 
     def each(&block)
