@@ -14,7 +14,7 @@ module Cubscout
       end
 
       def reset!
-        @client_id = @client_secret = @access_token = nil
+        @client_id = @client_secret = nil
         @access_token = @oauth_client = nil
         @api_prefix = DEFAULT_API_PREFIX
       end
@@ -34,7 +34,19 @@ module Cubscout
       end
 
       def oauth_client
-        @oauth_client ||= OAuth2::Client.new(@client_id, @client_secret, site: api_prefix, token_url: '/oauth2/token')
+        @oauth_client ||= begin
+          unless @client_id && @client_secret
+            raise ParameterMissing, <<~TEXT
+              You need to provide a client_id and client secret that you can get from helpscout (In Your profile -> my Apps)
+
+              Cubscout::Config.client_id = 'your-app-id-here'
+              Cubscout::Config.client_secret = 'your-app-secret-here'
+
+            TEXT
+          end
+
+          OAuth2::Client.new(@client_id, @client_secret, site: api_prefix, token_url: '/oauth2/token')
+        end
       end
     end
   end
