@@ -1,0 +1,14 @@
+{
+  "id": 55667,
+  "firstName": "Tim",
+  "lastName": "Owner",
+  "email": "tim@owner.com",
+  "role": "owner",
+  "timezone": "Europe/Paris",
+  "photoUrl": "https://random.imageurl.com/tim.jpg",
+  "createdAt": "2019-01-22T08:47:26Z",
+  "updatedAt": "2019-04-19T06:19:47Z",
+  "type": "user",
+  "_links": {"self": {"href": "https://api.helpscout.net/v2/users/55667"}}
+}
+

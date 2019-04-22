@@ -5,7 +5,8 @@ module Cubscout
     attr_reader :attributes
 
     def initialize(attributes)
-      @attributes = attributes
+      # Dirty deep_transform_keys to strings
+      @attributes = JSON.parse(attributes.to_json)
     end
 
     def method_missing(method_name, *args, &block)
@@ -13,10 +14,6 @@ module Cubscout
       return super unless @attributes.key?(key)
 
       @attributes[key]
-    end
-
-    def underscore(string)
-      string.gsub(/[A-Z]/) { "_#{$&.downcase}" }
     end
 
     def camelize(sym)
