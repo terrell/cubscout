@@ -3,22 +3,31 @@
 require "oauth2"
 
 module Cubscout
-  DEFAULT_API_PREFIX = 'https://api.helpscout.net/v2'
-
+  # The Config class allows for API client configuration. Basic setup:
+  #    require 'cubscout'
+  #    Cubscout::Config.client_id = 'YOUR_APP_ID'
+  #    Cubscout::Config.client_secret = 'YOUR_APP_SECRET'
   class Config
+    DEFAULT_API_PREFIX = 'https://api.helpscout.net/v2'
+
     class << self
       attr_writer :api_prefix, :client_id, :client_secret
 
+      # @return [String] Base url of Helpscout's API V2.
       def api_prefix
         @api_prefix ||= DEFAULT_API_PREFIX
       end
 
+      # Resets +client_id+, +client_secret+, and +oauth_client+ to null values,
+      # +api_prefix+ to DEFAULT_API_PREFIX
       def reset!
         @client_id = @client_secret = nil
         @access_token = @oauth_client = nil
         @api_prefix = DEFAULT_API_PREFIX
       end
 
+      # @return [String] OAuth token used in every request header:
+      #   +Authorization: Bearer #{Cubscout::Config.oauth_token}+
       def oauth_token
         access_token.token
       end
