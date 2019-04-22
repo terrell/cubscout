@@ -1,5 +1,5 @@
 module Cubscout
   class User < Object
-    path "users"
+    endpoint "users"
   end
 end
