@@ -46,6 +46,16 @@ conversations.each { |conversation| puts conversation.mailbox_id }
 
 Check Helpscout's API documentation for [all supported filters](https://developer.helpscout.com/mailbox-api/endpoints/conversations/list/#url-parameters) and [attributes returned](https://developer.helpscout.com/mailbox-api/endpoints/conversations/list/#response).
 
+All filter keys must be passed in the same format as described in the documentation, and all values must be strings or integers. Attribute keys must be symbols:
+
+```ruby
+conversations = Cubscout::Conversation.all(page: 1,
+                                           assigned_to: 1234,
+                                           sortField: "customerName",
+                                           modifiedSince: (DateTime.now - 4).to_time.utc.iso8601,
+                                           tag: "red,blue")
+```
+
 Get one conversation by id:
 
 ```ruby
@@ -53,8 +63,9 @@ Get one conversation by id:
 conversation = Cubscout::Conversation.find(12345)
 
 # Cubscout::Conversation.find returns one Cubscout::Conversation object, from
-# which attributes can be read
+# which attributes can be read. attributes can be read as snake case or camel case.
 puts conversation.mailbox_id
+puts conversation.mailboxId
 ```
 
 Check Helpscout's API documentation for all [attributes returned](https://developer.helpscout.com/mailbox-api/endpoints/conversations/get/#response)
@@ -105,7 +116,7 @@ users = Cubscout::User.all
 users = Cubscout::User.all(mailbox: 12345)
 
 # Cubscout::User.all returns an array of Cubscout::User objects, from
-# which attributes can be read
+# which attributes can be read.
 users.each { |user| puts user.first_name }
 ```
 
@@ -118,7 +129,8 @@ Get one user by id:
 user = Cubscout::User.find(12345)
 
 # Cubscout::User.find returns one Cubscout::User object, from
-# which attributes can be read
+# which attributes can be read. attributes can be read as snake case or camel case.
+puts user.firstName
 puts user.first_name
 ```
 
