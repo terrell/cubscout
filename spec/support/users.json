@@ -1,0 +1,49 @@
+{
+  "_embedded": {
+    "users": [
+      {
+        "id": 55667,
+        "firstName": "Tim",
+        "lastName": "Owner",
+        "email": "tim@owner.com",
+        "role": "owner",
+        "timezone": "Europe/Paris",
+        "photoUrl": "https://random.imageurl.com/tim.jpg",
+        "createdAt": "2019-01-22T08:47:26Z",
+        "updatedAt": "2019-04-19T06:19:47Z",
+        "type": "user",
+        "_links": {"self": {"href": "https://api.helpscout.net/v2/users/55667"}}
+      }, {
+        "id": 334455,
+        "firstName": "Hanna",
+        "lastName": "Admin",
+        "email": "hanna@admin.com",
+        "role": "admin",
+        "timezone": "UTC",
+        "createdAt": "2014-12-22T08:48:38Z",
+        "updatedAt": "2019-04-22T09:13:54Z",
+        "type": "user",
+        "_links": {"self": {"href": "https://api.helpscout.net/v2/users/334455"}}
+      }, {
+        "id": 777666,
+        "firstName": "Rob",
+        "lastName": "Employee",
+        "email": "rob@employee.com",
+        "role": "user",
+        "timezone": "Europe/Berlin",
+        "photoUrl": "https://random.imageurl.com/rob.jpg",
+        "createdAt": "2019-01-11T09:20:26Z",
+        "updatedAt": "2019-04-22T06:32:03Z",
+        "type": "user",
+        "_links": {"self": {"href": "https://api.helpscout.net/v2/users/777666"}}}
+    ]
+  },
+  "_links": {
+    "first": {"href": "https://api.helpscout.net/v2/users?page=1"},
+    "last": {"href": "https://api.helpscout.net/v2/users?page=2"},
+    "next": {"href": "https://api.helpscout.net/v2/users?page=2"},
+    "page": {"href": "https://api.helpscout.net/v2/users?page=1"},
+    "self": {"href": "https://api.helpscout.net/v2/users?page=1"}
+  },
+ "page": {"size": 50, "totalElements": 81, "totalPages": 2, "number": 1}
+}

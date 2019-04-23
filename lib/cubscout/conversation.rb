@@ -1,15 +1,14 @@
 module Cubscout
   class Conversation < Object
-    path "conversations"
+    endpoint "conversations"
 
     class << self
       def threads(id)
-        Cubscout.connection.get("#{read_path}/#{id}/threads").body.dig("_embedded", "threads").map { |item| Object.new(item) }
+        Cubscout.connection.get("#{path}/#{id}/threads").body.dig("_embedded", "threads").map { |item| Object.new(item) }
       end
 
-      def create_note(id, attributes)
-        raise "Missing attribute `text` while creating new note" unless attributes.has_key?(:text)
-        Cubscout.connection.post("#{read_path}/#{id}/notes", attributes.to_json).body
+      def create_note(id, text:, **attributes)
+        Cubscout.connection.post("#{path}/#{id}/notes", attributes.merge(text: text).to_json).body
       end
     end
 
