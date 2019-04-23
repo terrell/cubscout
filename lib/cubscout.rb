@@ -14,12 +14,14 @@ require "cubscout/user"
 module Cubscout
   class Error < StandardError; end
 
-  class AuthenticationError < StandardError; end
-  class InternalError < StandardError; end
-  class InvalidFormatError < StandardError; end
-  class JsonParseError < StandardError; end
-  class MalformedRequestError < StandardError; end
-  class PermissionDeniedError < StandardError; end
-  class ResourceNotFoundError < StandardError; end
-  class RateLimitExceeded < StandardError; end
+  class AuthenticationError < Error; end
+  class InternalError < Error; end
+  class InvalidFormatError < Error; end
+  class JsonParseError < Error; end
+  class MalformedRequestError < Error; end
+  class PermissionDeniedError < Error; end
+  class ResourceNotFoundError < Error; end
+  class RateLimitExceeded < Error; end
+
+  class ParameterMissing < Error; end
 end
