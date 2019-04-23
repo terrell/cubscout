@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/GetSilverfin/cubscout.svg?branch=master)](https://travis-ci.org/GetSilverfin/cubscout)
+
 # Cubscout
 
 Unofficial Ruby client for the [Helpscout API V2](https://developer.helpscout.com/mailbox-api/). 
