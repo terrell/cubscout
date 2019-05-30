@@ -77,6 +77,76 @@ RSpec.describe Cubscout::Conversation do
     end
   end
 
+  describe ".update" do
+    it "requires op" do
+      expect { Cubscout::Conversation.update(123, path: "/status") }.to raise_exception ArgumentError
+    end
+
+    it "requires path" do
+      expect { Cubscout::Conversation.update(123, op: "replace") }.to raise_exception ArgumentError
+    end
+
+    describe "operations" do
+      before do
+        stub_request(:patch, %r{https://api.helpscout.net/v2/conversations/\d+}).
+          to_return(status: 204)
+      end
+
+      it "modifies the subject" do
+        expect {
+          Cubscout::Conversation.update(123, op: "replace", path: "/subject", value: "[REDACTED]")
+        }.not_to raise_exception
+      end
+
+      it "modifies the customer" do
+        expect {
+          Cubscout::Conversation.update(123, op: "replace", path: "/primaryCustomer.id", value: 254)
+        }.not_to raise_exception
+      end
+
+      it "publishes draft" do
+        expect {
+          Cubscout::Conversation.update(123, op: "replace", path: "/draft", value: true)
+        }.not_to raise_exception
+      end
+
+      it "moves to another mailbox" do
+        expect {
+          Cubscout::Conversation.update(123, op: "move", path: "/mailboxId", value: 5568)
+        }.not_to raise_exception
+      end
+
+      it "changes status" do
+        expect {
+          Cubscout::Conversation.update(123, op: "replace", path: "/status", value: "pending")
+        }.not_to raise_exception
+      end
+
+      it "replace assignee" do
+        expect {
+          Cubscout::Conversation.update(123, op: "replace", path: "/assignTo", value: 556)
+        }.not_to raise_exception
+      end
+
+      it "removes assignee" do
+        expect {
+          Cubscout::Conversation.update(123, op: "remove", path: "/assignTo", value: 556)
+        }.not_to raise_exception
+      end
+    end
+  end
+
+  describe "#assignee" do
+    it "returns the user assigned to the conversation" do
+      stub_request(:get, %r{https://api.helpscout.net/v2/users/\d+}).
+        to_return(status: 200, body: File.read("#{__dir__}/../support/user.json"))
+
+      user = Cubscout::Conversation.new(id: 123, assignee: {id: 55667}).assignee
+
+      expect(user.class).to eq Cubscout::User
+    end
+  end
+
   describe "#threads" do
     it "gets the threads of a conversation" do
       stub_request(:get, %r{https://api.helpscout.net/v2/conversations/\d+/threads}).
@@ -100,14 +170,62 @@ RSpec.describe Cubscout::Conversation do
     end
   end
 
-  describe "#assignee" do
-    it "returns the user assigned to the conversation" do
-      stub_request(:get, %r{https://api.helpscout.net/v2/users/\d+}).
-        to_return(status: 200, body: File.read("#{__dir__}/../support/user.json"))
+  describe "#update" do
+    it "requires op" do
+      expect { Cubscout::Conversation.new(id: 123).update(path: "/status") }.to raise_exception ArgumentError
+    end
 
-      user = Cubscout::Conversation.new(id: 123, assignee: {id: 55667}).assignee
+    it "requires path" do
+      expect { Cubscout::Conversation.new(id: 123).update(op: "replace") }.to raise_exception ArgumentError
+    end
 
-      expect(user.class).to eq Cubscout::User
+    describe "operations" do
+      before do
+        stub_request(:patch, %r{https://api.helpscout.net/v2/conversations/\d+}).
+          to_return(status: 204)
+      end
+
+      it "modifies the subject" do
+        expect {
+          Cubscout::Conversation.new(id: 123).update(op: "replace", path: "/subject", value: "[REDACTED]")
+        }.not_to raise_exception
+      end
+
+      it "modifies the customer" do
+        expect {
+          Cubscout::Conversation.new(id: 123).update(op: "replace", path: "/primaryCustomer.id", value: 254)
+        }.not_to raise_exception
+      end
+
+      it "publishes draft" do
+        expect {
+          Cubscout::Conversation.new(id: 123).update(op: "replace", path: "/draft", value: true)
+        }.not_to raise_exception
+      end
+
+      it "moves to another mailbox" do
+        expect {
+          Cubscout::Conversation.new(id: 123).update(op: "move", path: "/mailboxId", value: 5568)
+        }.not_to raise_exception
+      end
+
+      it "changes status" do
+        expect {
+          Cubscout::Conversation.new(id: 123).update(op: "replace", path: "/status", value: "pending")
+        }.not_to raise_exception
+      end
+
+      it "replace assignee" do
+        expect {
+          Cubscout::Conversation.new(id: 123).update(op: "replace", path: "/assignTo", value: 556)
+        }.not_to raise_exception
+      end
+
+      it "removes assignee" do
+        expect {
+          Cubscout::Conversation.new(id: 123).update(op: "remove", path: "/assignTo", value: 556)
+        }.not_to raise_exception
+      end
     end
   end
 end

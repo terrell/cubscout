@@ -72,6 +72,18 @@ puts conversation.mailboxId
 
 Check Helpscout's API documentation for all [attributes returned](https://developer.helpscout.com/mailbox-api/endpoints/conversations/get/#response)
 
+Update a conversation:
+
+```ruby
+conversation = Cubscout::Conversation.find(12345)
+conversation.update(op: "replace", path: "/subject", value: "New conversation subject")
+
+# or
+Cubscout::Conversation.update(12345, op: "replace", path: "/subject", value: "New conversation subject")
+```
+
+Multiple combinations of `:op`, `:path` and `:value` are permitted, check Helpscout's API documentation for [all the possibilities](https://developer.helpscout.com/mailbox-api/endpoints/conversations/update/#valid-paths-and-operations).
+
 ### Threads
 
 In Helpscout's lingo, threads are all the items following a conversation: notes, replies, assignment to users, etc.

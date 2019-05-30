@@ -34,6 +34,18 @@ module Cubscout
       def create_note(id, text:, **attributes)
         Cubscout.connection.post("#{path}/#{id}/notes", attributes.merge(text: text).to_json).body
       end
+
+      # Update a conversation.
+      # @param id [Integer] the conversation ID
+      # @param op [String] Patch operation to be carried out, one of +move+, +remove+, +replace+
+      # @param path [String] Path of the value to be changed, one of:
+      #   +/assignTo+, +/draft+, +/mailboxId+, +/primaryCustomer.id+, +/status+, +/subject+
+      # @option attributes [Varies] :value Value to be used in operation, refer to this documentation
+      #   for valid types: https://developer.helpscout.com/mailbox-api/endpoints/conversations/update/#valid-paths-and-operations.
+      #   In case of status update +(op: "replace", path: "/status")+, :value must be one of +active+, +closed+, +open+, +pending+, +spam+
+      def update(id, op:, path:, **attributes)
+        Cubscout.connection.patch("#{Conversation.path}/#{id}", attributes.merge(op: op, path: path).to_json).body
+      end
     end
 
     # Get the assignee of the conversation
@@ -50,6 +62,7 @@ module Cubscout
       Conversation.threads(self.id)
     end
 
+    # Create a note to a conversation.
     # @option attributes [String] :text the note's text. Required.
     # @option attributes [Integer] :user (Resource Owner) ID of the user creating the note.
     # @option attributes [Boolean] :imported (false) The imported field enables thread to be
@@ -66,6 +79,17 @@ module Cubscout
     # @return [Boolean] success status
     def create_note(attributes)
       Conversation.create_note(self.id, attributes)
+    end
+
+    # Update a conversation.
+    # @option attributes [String] :op Patch operation to be carried out, one of +move+, +remove+, +replace+. Required
+    # @option attributes [String] :path Path of the value to be changed, one of:
+    #   +/assignTo+, +/draft+, +/mailboxId+, +/primaryCustomer.id+, +/status+, +/subject+. Required
+    # @option attributes [Varies] :value Value to be used in operation, refer to this documentation
+    #   for valid types: https://developer.helpscout.com/mailbox-api/endpoints/conversations/update/#valid-paths-and-operations.
+    #   In case of status update +(op: "replace", path: "/status")+, :value must be one of +active+, +closed+, +open+, +pending+, +spam+
+    def update(attributes)
+      Conversation.update(self.id, attributes)
     end
   end
 end
