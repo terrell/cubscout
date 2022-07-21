@@ -88,8 +88,8 @@ module Cubscout
     # @option attributes [Varies] :value Value to be used in operation, refer to this documentation
     #   for valid types: https://developer.helpscout.com/mailbox-api/endpoints/conversations/update/#valid-paths-and-operations.
     #   In case of status update +(op: "replace", path: "/status")+, :value must be one of +active+, +closed+, +open+, +pending+, +spam+
-    def update(attributes)
-      Conversation.update(self.id, attributes)
+    def update(**options)
+      Conversation.update(self.id, op: options[:op], path: options[:path])
     end
   end
 end
